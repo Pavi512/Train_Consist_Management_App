@@ -2,60 +2,69 @@ package trainconsistmanagement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TrainConsistManagement {
+    // Inner Bogie class
+    static class Bogie {
 
-    // Inner Goods Bogie class
-    static class GoodsBogie {
+        String name;
+        int capacity;
 
-        String type;
-        String cargo;
-
-        public GoodsBogie(String type, String cargo) {
-            this.type = type;
-            this.cargo = cargo;
+        public Bogie(String name, int capacity) {
+            this.name = name;
+            this.capacity = capacity;
         }
 
         @Override
         public String toString() {
-            return type + " -> " + cargo;
+            return "Bogie Name: " + name + ", Capacity: " + capacity;
         }
     }
 
     public static void main(String[] args) {
 
         System.out.println("==================================================");
-        System.out.println(" UC12 - Safety Compliance Check for Goods Bogies");
+        System.out.println(" UC13 - Performance Comparison (Loops vs Streams)");
         System.out.println("==================================================\n");
 
-        // List of goods bogies
-        List<GoodsBogie> goodsBogies = new ArrayList<>();
+        // Create a collection of bogies
+        List<Bogie> bogies = new ArrayList<>();
 
-        goodsBogies.add(new GoodsBogie("Cylindrical", "Petroleum"));
-        goodsBogies.add(new GoodsBogie("Open", "Coal"));
-        goodsBogies.add(new GoodsBogie("Box", "Grains"));
-        goodsBogies.add(new GoodsBogie("Cylindrical", "Coal"));
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("Second Sitting", 108));
+        bogies.add(new Bogie("Executive Chair", 52));
+        bogies.add(new Bogie("General", 90));
 
-        // Display goods bogies
-        System.out.println("Goods Bogies in train:");
-        for (GoodsBogie bogie : goodsBogies) {
-            System.out.println(bogie);
-        }
-        // Safety compliance check
-        boolean isSafe = goodsBogies.stream()
-                .allMatch(bogie ->
-                        !bogie.type.equalsIgnoreCase("Cylindrical")
-                                || bogie.cargo.equalsIgnoreCase("Petroleum"));
+        //Loop-based Filtering
+        long loopStart = System.nanoTime();
 
-        // Display result
-        System.out.println("\nSafety Compliance Status: "+isSafe);
+        List<Bogie> loopResult = new ArrayList<>();
 
-        if (isSafe) {
-            System.out.println("Train formation is SAFE.");
-        } else {
-            System.out.println("Train formation is NOT SAFE.");
+        for (Bogie bogie : bogies) {
+            if (bogie.capacity > 60) {
+                loopResult.add(bogie);
+            }
         }
 
-        System.out.println("\nUC12 safety compliance validation.");
+        long loopEnd = System.nanoTime();
+
+        //Stream-based Filtering
+        long streamStart = System.nanoTime();
+
+        List<Bogie> streamResult = bogies.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
+
+        long streamEnd = System.nanoTime();
+
+        // Display Results
+
+        System.out.println("Loop Execution Time   : " + (loopEnd - loopStart) + " ns");
+        System.out.println("Stream Execution Time : " + (streamEnd - streamStart) + " ns");
+
+        System.out.println("\nUC13 performance comparison completed.");
     }
 }
