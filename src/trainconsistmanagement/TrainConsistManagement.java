@@ -3,42 +3,54 @@ package trainconsistmanagement;
 import java.util.Scanner;
 
 public class TrainConsistManagement {
-
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("==================================================");
-        System.out.println(" UC18 - Linear Search for Bogie ID");
+        System.out.println(" UC19 - Binary Search for Bogie ID");
         System.out.println("==================================================\n");
 
-        // Array of bogie IDs
-        String[] bogieIds = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+        // Sorted array of bogie IDs
+        String[] bogieIds = {"BG101", "BG209", "BG309", "BG412", "BG550"};
 
-        // Display available bogies
-        System.out.print("Available Bogie IDs: ");
+        // Display available bogie IDs
+        System.out.print("Sorted Bogie IDs: \n");
+
         for (String id : bogieIds) {
             System.out.println(id);
         }
 
-        String searchId = "BG309";
+        // Accept search key
+        System.out.print("\nEnter Bogie ID to Search: ");
+        String searchKey = scanner.nextLine();
 
+        int low = 0;
+        int high = bogieIds.length - 1;
         boolean found = false;
 
-        // Linear Search
-        for (int i = 0; i < bogieIds.length; i++) {
-            if (bogieIds[i].equals(searchId)) {
-                System.out.println("\nBogie " + bogieIds[i] + " found in train consist.");
+        // Binary Search
+        while (low <= high) {
+            int mid = (low + high) / 2;
+
+            int result = searchKey.compareTo(bogieIds[mid]);
+
+            if (result == 0) {
+                System.out.println("\nBogie "+bogieIds[mid]+" found using Binary Search.");
                 found = true;
                 break;
+            }
+            else if (result < 0) {
+                high = mid - 1;
+            }
+            else {
+                low = mid + 1;
             }
         }
 
         if (!found) {
             System.out.println("\nBogie ID not found.");
         }
-        System.out.println("\nUC18 linear search completed successfully.");
 
-        scanner.close();
+        System.out.println("\nUC19 binary search completed");
     }
 }
