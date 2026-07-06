@@ -1,42 +1,34 @@
 package trainconsistmanagement;
 
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class TrainConsistManagement {
     public static void main(String[] args) {
 
-        System.out.println("========================================");
-        System.out.println(" UC4 - Maintain ordered bogie consist ");
-        System.out.println("========================================");
+        System.out.println("===========================================");
+        System.out.println(" UC5 - Preserve insertion order of Bogies ");
+        System.out.println("===========================================");
+        System.out.println();
 
-        //LinkedList to maintain insertion order
-        LinkedList<String> consist = new LinkedList<>();
+        // Create LinkedHashSet to remove duplicates and maintain insertion order
+        Set<String> formation = new LinkedHashSet<>();
 
         // Add bogies
-        consist.addLast("Engine");
-        consist.addLast("Sleeper");
-        consist.addLast("AC");
-        consist.addLast("Cargo");
-        consist.addLast("Guard");
+        formation.add("Engine");
+        formation.add("Sleeper");
+        formation.add("Cargo");
+        formation.add("Guard");
 
-        System.out.println("Initial Train Consist: ");
-        System.out.println(consist);
+        // Duplicate bogie
+        formation.add("Sleeper");
 
-        // Insert Pantry Car at position 2
-        consist.add(2, "Pantry Car");
+        System.out.println("Final Train Formation: ");
+        System.out.println(formation);
 
-        System.out.println("\nAfter Inserting Pantry Car: ");
-        System.out.println(consist);
+        System.out.println("\nNote:");
+        System.out.println("LinkedHashSet preserves insertion order and ignores duplicate automatically.");
 
-        // Remove first bogie
-        consist.removeFirst();
-
-        // Remove last bogie
-        consist.removeLast();
-
-        System.out.println("\nFinal Train Consist: ");
-        System.out.println(consist);
-
-        System.out.println("\nUC4 Ordered consist operations completed.");
+        System.out.println("\nUC5 formation setup completed.");
     }
 }
