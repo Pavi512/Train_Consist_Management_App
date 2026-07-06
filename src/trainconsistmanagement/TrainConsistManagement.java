@@ -16,7 +16,7 @@ public class TrainConsistManagement {
 
         public PassengerBogie(String name, int capacity) throws InvalidCapacityException {
             if (capacity <= 0) {
-                throw new InvalidCapacityException("Can't create bogi, Capacity must be greater than zero.");
+                throw new InvalidCapacityException("Can't create bogie, Capacity must be greater than zero.");
             }
 
             this.name = name;
