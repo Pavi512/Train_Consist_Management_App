@@ -1,57 +1,40 @@
 package trainconsistmanagement;
 
-// Custom Runtime Exception
-class CargoSafetyException extends RuntimeException {
-    public CargoSafetyException(String message) {
-        super(message);
-    }
-}
-
 public class TrainConsistManagement {
-
-    // Inner Goods Bogie class
-    static class GoodsBogie {
-        String shape;
-
-        public GoodsBogie(String shape) {
-            this.shape = shape;
-        }
-
-        public void assignCargo(String cargo) {
-            try {
-                // Rule: Rectangular bogie cannot carry Petroleum
-                if (shape.equalsIgnoreCase("Rectangular")
-                        && cargo.equalsIgnoreCase("Petroleum")) {
-
-                    throw new CargoSafetyException("Unsafe cargo assignment!");
-                }
-                System.out.println("Cargo assigned successfully -> " + cargo);
-            }
-            catch (CargoSafetyException e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-            finally {
-                System.out.println("Cargo validation completed for " + shape + " bogie");
-            }
-        }
-    }
 
     public static void main(String[] args) {
 
         System.out.println("==================================================");
-        System.out.println(" UC15 - Safe Cargo Assignment");
+        System.out.println(" UC16 - Manual Sorting using bubble sort");
         System.out.println("==================================================\n");
 
-        // Valid
-        GoodsBogie cylindrical = new GoodsBogie("Cylindrical");
-        cylindrical.assignCargo("Petroleum");
+        // Passenger bogie capacities
+        int[] capacities = {72, 24, 56, 148, 85, 90};
 
+        System.out.print("Original Capacities: ");
         System.out.println();
+        for (int capacity : capacities) {
+            System.out.print(capacity + " ");
+        }
 
-        // Invalid
-        GoodsBogie rectangular = new GoodsBogie("Rectangular");
-        rectangular.assignCargo("Petroleum");
+        // Bubble Sort Algorithm
+        for (int i = 0; i < capacities.length - 1; i++) {
+            for (int j = 0; j < capacities.length - 1 - i; j++) {
+                if (capacities[j] > capacities[j + 1]) {
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
+            }
+        }
 
-        System.out.println("\nUC15 runtime handling completed.");
+        // Display sorted array
+        System.out.print("\n\nSorted Capacities: ");
+        System.out.println();
+        for (int capacity : capacities) {
+            System.out.print(capacity + " ");
+        }
+
+        System.out.println("\n\nUC16 bubble sort completed successfully.");
     }
 }
