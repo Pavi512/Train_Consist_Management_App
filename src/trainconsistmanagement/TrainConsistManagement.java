@@ -1,43 +1,35 @@
 package trainconsistmanagement;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 public class TrainConsistManagement {
     public static void main(String[] args) {
 
-        // Display header banner
-        System.out.println("==========================================");
-        System.out.println("   UC2 - Add Passenger Bogies to Train    ");
-        System.out.println("==========================================\n");
+        System.out.println("========================================");
+        System.out.println(" UC3 - Track Unique Bogie IDs ");
+        System.out.println("========================================");
 
-        // Initialize an empty ArrayList for passenger bogies
-        List<String> passengerBogies = new ArrayList<>();
+        //HashSet to store unique ids
+        Set<String> bogies = new HashSet<String>();
 
-        // 1. Add Bogies (Create/Insert)
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        //Insert bogie IDs
+        bogies.add("BG101");
+        bogies.add("BG102");
+        bogies.add("BG103");
+        bogies.add("BG104");
 
-        System.out.println("After Adding Bogies:");
-        System.out.println("Passenger Bogies : " + passengerBogies + "\n");
+        // Duplicate IDs
+        bogies.add("BG101");
+        bogies.add("BG102");
 
-        // 2. Remove Bogie (Delete/Detach)
-        passengerBogies.remove("AC Chair");
+        System.out.println("Bogies after Insertion: ");
+        System.out.println(bogies);
 
-        System.out.println("After Removing 'AC Chair':");
-        System.out.println("Passenger Bogies : " + passengerBogies + "\n");
+        System.out.println("Note: ");
+        System.out.println("Duplicates are automatically ignored by HashSet");
 
-        // 3. Check Existence (Search/Inspect)
-        System.out.println("Checking if 'Sleeper' exists:");
-        boolean hasSleeper = passengerBogies.contains("Sleeper");
-        System.out.println("Contains Sleeper? : " + hasSleeper + "\n");
+        System.out.println("UC3 uniqueness validation completed");
 
-        // 4. Print Final Consist State
-        System.out.println("Final Train Passenger Consist:");
-        System.out.println(passengerBogies + "\n");
-
-        System.out.println("UC2 operations completed successfully...");
     }
 }
-
