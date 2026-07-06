@@ -112,26 +112,20 @@ The project contains 20 independent use cases, each focusing on a specific Java 
 - Linear Search
 - Binary Search
 
----
 
 # Directory Structure
 
 ```text
-Train_Consist_Management_App
+Train_Consist_Management_App/
 │
-├── src
-│   └── trainconsistmanagement
-│       ├── UC1
-│       ├── UC2
-│       ├── UC3
-│       ├── ...
-│       └── UC20
+├── src/
+│   └── trainconsistmanagement/
+│       └── TrainConsistManagement.java   # Updated for UC1 → UC20
 │
 ├── README.md
+├── LICENSE
 └── .gitignore
 ```
-
----
 
 # Running the Application
 
